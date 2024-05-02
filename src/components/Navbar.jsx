@@ -152,6 +152,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
+              
               <Link to="#">
               <RiAccountBoxLine className="notification-icon acount-icon" />
                 Your account has been blocked
