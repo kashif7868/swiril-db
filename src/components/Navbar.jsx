@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaBell, FaCog } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
 import { MdDashboard, MdHomeRepairService, MdEmail } from "react-icons/md";
-import { FaUserPlus,FaUser } from "react-icons/fa6";
-import userImage from "../asset/images/icon/haider.jpg"
-import { FaChevronDown,FaRegFileAlt } from "react-icons/fa";
-import { AiOutlineLogout } from "react-icons/ai";
-import { RiMoneyDollarBoxLine } from "react-icons/ri";
-import { IoLocationSharp } from "react-icons/io5";
-import { GrLanguage } from "react-icons/gr"
-import { RiAccountBoxLine } from "react-icons/ri";
+import {
+  FaBell,
+  FaCog,
+  FaUser,
+  FaRegFileAlt,
+  FaChevronDown,
+  FaUserPlus,
+} from "react-icons/fa";
 import { HiOutlineMailOpen } from "react-icons/hi";
+import { RiAccountBoxLine, RiMoneyDollarBoxLine } from "react-icons/ri";
+import { IoLocationSharp } from "react-icons/io5";
+import { GrLanguage } from "react-icons/gr";
+import { AiOutlineLogout } from "react-icons/ai";
+import userImage from "../asset/images/icon/haider.jpg";
 import "../asset/css/navbar.css";
-
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [isOpenPr, setIsOpenPr] = useState(false);
@@ -22,41 +25,14 @@ const Navbar = () => {
   const [isOpenSettings, setIsOpenSettings] = useState(false);
   const [isOpenNameUser, setIsOpenNameUser] = useState(false);
 
-  // Example useEffect to log state changes
-  useEffect(() => {
-    console.log(`isOpenPr: ${isOpenPr}`);
-    console.log(`isOpenUser: ${isOpenUser}`);
-    console.log(`isOpenNotification: ${isOpenNotification}`);
-    console.log(`isOpenSettings: ${isOpenSettings}`);
-    console.log(`isOpenNameUser: ${isOpenNameUser}`);
-  }, [
-    isOpenPr,
-    isOpenUser,
-    isOpenNotification,
-    isOpenSettings,
-    isOpenNameUser,
-  ]);
-
   const toggleDropdown = (type) => {
-    switch (type) {
-      case "db":
-        setIsOpenPr(!isOpenPr);
-        break;
-      case "user":
-        setIsOpenUser(!isOpenUser);
-        break;
-      case "notification":
-        setIsOpenNotification(!isOpenNotification);
-        break;
-      case "settings":
-        setIsOpenSettings(!isOpenSettings);
-        break;
-      case "nameUser":
-        setIsOpenNameUser(!isOpenNameUser);
-        break;
-      default:
-        break;
-    }
+    setIsOpenPr(type === "db" ? !isOpenPr : false);
+    setIsOpenUser(type === "user" ? !isOpenUser : false);
+    setIsOpenNotification(
+      type === "notification" ? !isOpenNotification : false
+    );
+    setIsOpenSettings(type === "settings" ? !isOpenSettings : false);
+    setIsOpenNameUser(type === "nameUser" ? !isOpenNameUser : false);
   };
 
   return (
@@ -71,28 +47,33 @@ const Navbar = () => {
           : ""
       }`}
     >
-     <div className="container-left-side">
-     <div className="logo">
-        <h1>Swirl Marketing</h1>
+      <div className="container-left-side">
+        <div className="logo">
+          <h1>Swirl Marketing</h1>
+        </div>
       </div>
-     </div>
       <div className="container-center">
         <div className="dropdown-pr-main">
-          {/* Dropdown button with FaCog icon */}
-          <button
+          <motion.button
             className="dropdown-btn-db"
-            onClick={() => toggleDropdown("db")}
+            onMouseEnter={() => setIsOpenPr(true)}
+            onMouseLeave={() => setIsOpenPr(false)}
+            whileHover={{ scale: 1.1, borderColor: "#007bff" }}
+            whileTap={{ scale: 0.9 }}
           >
             <MdDashboard />
-            Dashboard
-          </button>
+            <span>
+              <Link to="/" className="text-white list-none">
+                Dashboard
+              </Link>
+            </span>
+          </motion.button>
           <ul className={`dropdown-content-pr ${isOpenPr ? "show" : ""}`}>
             <li>
-              <Link to="">Add New Service</Link>
+              <Link to="/add_new_service">Add New Service</Link>
             </li>
             <li>
-              <Link to="/invoices">
-                <img src="" alt="" />
+              <Link to="/service_list">
                 Service List
               </Link>
             </li>
@@ -113,30 +94,29 @@ const Navbar = () => {
           </button>
           <ul className={`dropdown-content-user ${isOpenUser ? "show" : ""}`}>
             <li>
-              <Link to="/login">
-                Login
-              </Link>
+              <Link to="/login">Login</Link>
             </li>
             <li>
-              <Link to="/register">
-                Register
-              </Link>
+              <Link to="/register">Register</Link>
             </li>
             <li>
-              <Link to="/forget_password">
-                Forget Password
-              </Link>
+              <Link to="/forget_password">Forget Password</Link>
             </li>
           </ul>
         </div>
       </div>
+
+      {/* ************************ */}
+      {/* ************************ */}
+      {/* ************************ */}
       <div className="container-right-side">
         <div className="dropdown-notification-main">
           {/* Dropdown button with FaBell icon */}
           <button
             className="dropdown-btn-notification"
             onClick={() => toggleDropdown("notification")}
-          ><FaBell className="icon-bell" />
+          >
+            <FaBell className="icon-bell" />
           </button>
           <ul
             className={`dropdown-content-notification ${
@@ -146,15 +126,14 @@ const Navbar = () => {
             <li>
               <span>You have 3 Notifications</span>
               <Link to="#">
-                <  HiOutlineMailOpen className="notification-icon email-icon" />
+                <HiOutlineMailOpen className="notification-icon email-icon" />
                 You got an email notification
                 <span>April 12, 2018 06:50 PM</span>
               </Link>
             </li>
             <li>
-              
               <Link to="#">
-              <RiAccountBoxLine className="notification-icon acount-icon" />
+                <RiAccountBoxLine className="notification-icon acount-icon" />
                 Your account has been blocked
                 <span>April 12, 2018 06:50 PM</span>
               </Link>
@@ -177,7 +156,7 @@ const Navbar = () => {
             className="dropdown-btn-settings"
             onClick={() => toggleDropdown("settings")}
           >
-            <FaCog className="icon-settings"/>
+            <FaCog className="icon-settings" />
           </button>
           <ul
             className={`dropdown-content-settings ${
@@ -186,43 +165,43 @@ const Navbar = () => {
           >
             <li>
               <Link to="#">
-              <FaUser className="setting-icon" />
+                <FaUser className="setting-icon" />
                 Account
               </Link>
             </li>
             <li>
               <Link to="#">
-              <IoMdSettings className="setting-icon" />
+                <FaCog className="setting-icon" />
                 Setting
               </Link>
             </li>
             <li>
               <Link to="#">
-              <RiMoneyDollarBoxLine className="setting-icon" />
+                <RiMoneyDollarBoxLine className="setting-icon" />
                 Billing
               </Link>
             </li>
             <li>
               <Link to="#">
-                <GrLanguage className="setting-icon"  />
+                <GrLanguage className="setting-icon" />
                 Language
               </Link>
             </li>
             <li>
               <Link to="#">
-              <IoLocationSharp className="setting-icon"  />
+                <IoLocationSharp className="setting-icon" />
                 Location
               </Link>
             </li>
             <li>
               <Link to="#">
-              <MdEmail className="setting-icon" />
-                Email
+                <MdEmail className="setting-icon" />
+                email
               </Link>
             </li>
             <li>
               <Link to="#">
-              <FaBell className="setting-icon" />
+                <FaBell className="setting-icon" />
                 Notification
               </Link>
             </li>
@@ -230,7 +209,10 @@ const Navbar = () => {
         </div>
         <div className="dropdown-name-user-main">
           {/* Dropdown button with FaUser icon */}
-          <button className="dropdown-btn-name-user"onClick={() => toggleDropdown("nameUser")} >
+          <button
+            className="dropdown-btn-name-user"
+            onClick={() => toggleDropdown("nameUser")}
+          >
             <img src={userImage} alt="" />
             Haider Ashraf
             <FaChevronDown />
@@ -249,25 +231,25 @@ const Navbar = () => {
             </li>
             <li>
               <Link to="#">
-              <FaUser />
+                <FaUser />
                 Account
               </Link>
             </li>
             <li>
               <Link to="#">
-              <IoMdSettings />
+                <FaCog />
                 Setting
               </Link>
             </li>
             <li>
               <Link to="#">
-              <RiMoneyDollarBoxLine />
+                <RiMoneyDollarBoxLine />
                 Billing
               </Link>
             </li>
             <li>
               <Link to="#">
-              <AiOutlineLogout />
+                <AiOutlineLogout />
                 Logout
               </Link>
             </li>

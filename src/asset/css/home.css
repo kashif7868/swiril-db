@@ -1,0 +1,80 @@
+/* Breadcrumb styles */
+
+
+.au-breadcrumb__list {
+    margin: 1rem 3rem;
+    display: flex;
+    list-style: none;
+    position: relative;
+    bottom: 35px;
+}
+
+.au-breadcrumb__list li {
+    font-size: 14px;
+    color: #999;
+    margin-right: 5px; /* Moved from .au-breadcrumb__list .list-inline-item:not(:last-child) */
+}
+
+.au-breadcrumb__list .active a {
+    color: #999;
+}
+
+.au-breadcrumb__list .active a:hover {
+    color: #333;
+}
+
+.au-breadcrumb2,
+.au-breadcrumb3 {
+    padding-top: 48px;
+    padding-bottom: 50px;
+}
+
+.au-breadcrumb-span {
+    font-size: 14px;
+    color: #808080;
+}
+
+.au-breadcrumb2 .au-breadcrumb__list .active a,
+.au-breadcrumb3 .au-breadcrumb__list .active a {
+    color: #808080;
+}
+
+.au-breadcrumb2 .au-breadcrumb__list .active a:hover,
+.au-breadcrumb3 .au-breadcrumb__list .active a:hover {
+    color: #666;
+}
+
+.au-breadcrumb2 .au-breadcrumb__list li,
+.au-breadcrumb3 .au-breadcrumb__list li {
+    color: #808080;
+}
+
+@media (max-width: 991px) {
+    .au-breadcrumb-left {
+        margin-top: 20px;
+    }
+}
+
+/* Welcome section styles */
+.welcome .title-index {
+    margin-bottom: 123px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 3rem;
+    color: #01126c;
+    opacity: 0; /* Start with 0 opacity */
+    animation: fadeIn 2.5s ease-in-out infinite; /* Animation properties */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1; 
+    }
+}
+
+
+
+
